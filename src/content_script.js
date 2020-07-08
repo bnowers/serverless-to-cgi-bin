@@ -1,12 +1,12 @@
 walk(document.body);
 
-function walk(node) 
+function walk(node)
 {
 	// I stole this function from here:
 	// http://is.gd/mwZp7E
-	
+
 	var child, next;
-	
+
 	var tagName = node.tagName ? node.tagName.toLowerCase() : "";
 	if (tagName == 'input' || tagName == 'textarea') {
 		return;
@@ -15,13 +15,13 @@ function walk(node)
 		return;
 	}
 
-	switch ( node.nodeType )  
+	switch ( node.nodeType )
 	{
 		case 1:  // Element
 		case 9:  // Document
 		case 11: // Document fragment
 			child = node.firstChild;
-			while ( child ) 
+			while ( child )
 			{
 				next = child.nextSibling;
 				walk(child);
@@ -35,24 +35,27 @@ function walk(node)
 	}
 }
 
-function handleText(textNode) 
+function handleText(textNode)
 {
 	var v = textNode.nodeValue;
+	v = v.replace(/\bDonald J. Trump\b/g, "Barack Obama");
+	v = v.replace(/\bdonald j. trump\b/g, "Barack Obama");
+	v = v.replace(/\bDonald J. Trump's\b/g, "Barack Obama's");
+	v = v.replace(/\bdonald j. trump's\b/g, "Barack Obama's");
 
-	v = v.replace(/\bAWS Lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\bAWS lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\baws Lambda\b/g, "AWS Common Gateway Interface");
-	v = v.replace(/\baws lambda\b/g, "AWS Common Gateway Interface");
+	v = v.replace(/\bDonald John Trump\b/g, "Barack Obama");
+	v = v.replace(/\bdonald john trump\b/g, "Barack Obama");
+	v = v.replace(/\bDonald John Trump's\b/g, "Barack Obama's");
+	v = v.replace(/\bdonald john trump's\b/g, "Barack Obama's");
 
-	v = v.replace(/\bServerless\b/g, "cgi-bin");
-	v = v.replace(/\bserverless\b/g, "cgi-bin");
+	v = v.replace(/\bDonald Trump\b/g, "Barack Obama");
+	v = v.replace(/\bdonald trump\b/g, "Barack Obama");
+	v = v.replace(/\bDonald Trump's\b/g, "Barack Obama's");
+	v = v.replace(/\bdonald trump's\b/g, "Barack Obama's");
 
-	v = v.replace(/\bcgi-bin architecture\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin architectures\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin Architecture\b/g, "Common Gateway Interface architecture");
-	v = v.replace(/\bcgi-bin Architectures\b/g, "Common Gateway Interface architecture");
-	
+	v = v.replace(/\bTrump\b/g, "Obama");
+	v = v.replace(/\btrump\b/g, "Obama");
+	v = v.replace(/\bTrump's\b/g, "Obama's");
+	v = v.replace(/\btrump's\b/g, "Obama's");
 	textNode.nodeValue = v;
 }
-
-
